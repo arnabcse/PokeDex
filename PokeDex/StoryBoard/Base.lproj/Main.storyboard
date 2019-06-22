@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginLogo" translatesAutoresizingMaskIntoConstraints="NO" id="s2O-dx-huW">
-                                        <rect key="frame" x="66.999999999999986" y="35" width="240.00000000000003" height="160"/>
+                                        <rect key="frame" x="67" y="35" width="240" height="160"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="4yT-dg-JAd"/>
                                             <constraint firstAttribute="height" constant="160" id="t7c-lc-BsY"/>
@@ -157,7 +157,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGA-fy-4AD">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Here....." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t8m-FH-zDc">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Here. by Name/id/order ---" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t8m-FH-zDc">
                                                 <rect key="frame" x="8" y="5" width="266" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="7hX-Ga-HAp"/>
@@ -181,6 +181,9 @@
                                                     <constraint firstAttribute="height" constant="24" id="mDi-Ro-ba1"/>
                                                 </constraints>
                                                 <state key="normal" backgroundImage="FilterIcon"/>
+                                                <connections>
+                                                    <action selector="btnFilterTapped:" destination="WFQ-pf-YLS" eventType="touchUpInside" id="yBH-bw-Zbz"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.10980392160000001" green="0.14117647059999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
@@ -468,7 +471,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginLogo" translatesAutoresizingMaskIntoConstraints="NO" id="QrR-mb-61A">
-                                        <rect key="frame" x="66.999999999999986" y="27" width="240.00000000000003" height="160"/>
+                                        <rect key="frame" x="67" y="27" width="240" height="160"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="OWo-fv-cXd"/>
                                             <constraint firstAttribute="height" constant="160" id="wGK-KU-HPx"/>

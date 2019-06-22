@@ -19,7 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.txtFldSearch.delegate = self;
+    searchStr = @"";
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -66,6 +67,7 @@
         [m_objPokeMonListModel setM_strWeight:[[jsonInfoData valueForKey:@"weight"] stringValue]];
         [m_objPokeMonListModel setM_strBaseExperience:[[jsonInfoData valueForKey:@"base_experience"] stringValue]];
         [m_arrListInfo addObject:m_objPokeMonListModel];
+        searchArray = [NSMutableArray arrayWithArray:m_arrListInfo];
     }
 }
 
@@ -78,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [m_arrListInfo count];
+    return [searchArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,13 +89,13 @@
     static NSString *cellIdentifier = @"cellPokemonList";
     PokeMonListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    cell.lblPokemonName.text = [[m_arrListInfo objectAtIndex:indexPath.row]m_strName];
-    cell.lblPokemonOrder.text = [[m_arrListInfo objectAtIndex:indexPath.row]m_strOrder];
-    cell.lblPokemonId.text = [[m_arrListInfo objectAtIndex:indexPath.row]m_strId];
-    cell.lblPokemonHeight.text = [[m_arrListInfo objectAtIndex:indexPath.row]m_strHeight];
-    cell.lblPokemonWeight.text = [[m_arrListInfo objectAtIndex:indexPath.row]m_strWeight];
-    cell.lblPokemonBaseExp.text = [[m_arrListInfo objectAtIndex:indexPath.row]m_strBaseExperience];
-    NSURL *url = [NSURL URLWithString:[[m_arrListInfo objectAtIndex:indexPath.row]m_strImage]];
+    cell.lblPokemonName.text = [[searchArray objectAtIndex:indexPath.row]m_strName];
+    cell.lblPokemonOrder.text = [[searchArray objectAtIndex:indexPath.row]m_strOrder];
+    cell.lblPokemonId.text = [[searchArray objectAtIndex:indexPath.row]m_strId];
+    cell.lblPokemonHeight.text = [[searchArray objectAtIndex:indexPath.row]m_strHeight];
+    cell.lblPokemonWeight.text = [[searchArray objectAtIndex:indexPath.row]m_strWeight];
+    cell.lblPokemonBaseExp.text = [[searchArray objectAtIndex:indexPath.row]m_strBaseExperience];
+    NSURL *url = [NSURL URLWithString:[[searchArray objectAtIndex:indexPath.row]m_strImage]];
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *img = [[UIImage alloc] initWithData:data];
     cell.imgVWPokemoNImg.image = img;
@@ -103,5 +105,173 @@
     return cell;
 }
 
+#pragma mark - Text Field Delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSLog(@"textFieldShouldBeginEditing");
+    self.txtFldSearch.backgroundColor = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    NSLog(@"textFieldDidBeginEditing");
+}
+
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    NSLog(@"textFieldShouldEndEditing");
+    self.txtFldSearch.backgroundColor = [UIColor whiteColor];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSLog(@"textFieldDidEndEditing");
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if([string isEqualToString:@""]){
+        searchStr = @"";
+        searchArray = [NSMutableArray arrayWithArray:m_arrListInfo];
+        [self.tblVwPokemonList reloadData];
+    }else{
+        NSString *searchTerm = [searchStr stringByAppendingString:string];
+        searchStr = searchTerm;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(m_strName CONTAINS[cd] %@) OR (m_strId = %@) OR (m_strOrder = %@)",searchTerm,string,string];
+        searchArray =[NSMutableArray arrayWithArray:[m_arrListInfo filteredArrayUsingPredicate:predicate]];
+        NSLog(@"search array is:%@",searchArray);
+        [self.tblVwPokemonList reloadData];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField{
+    NSLog(@"textFieldShouldClear:");
+    searchStr = @"";
+    searchArray = [NSMutableArray arrayWithArray:m_arrListInfo];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@"textFieldShouldReturn:");
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(IBAction) btnFilterTapped:(id) sender{
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
+                                                                              message: nil
+                                                                       preferredStyle: UIAlertControllerStyleActionSheet];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Highest Order" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"m_strOrder"
+                                                                           ascending:NO
+                                                                          comparator:^(id obj1, id obj2){
+                                                                              return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                      options:NSNumericSearch];
+                                                                          }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Lowest Order" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"m_strOrder"
+                                                                           ascending:YES
+                                                                          comparator:^(id obj1, id obj2){
+                                                                              return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                      options:NSNumericSearch];
+                                                                          }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Most Base Experience" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"m_strBaseExperience"
+                                                                           ascending:NO
+                                                                          comparator:^(id obj1, id obj2){
+                                                                              return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                      options:NSNumericSearch];
+                                                                          }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Least Base Experience" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor =  [NSSortDescriptor sortDescriptorWithKey:@"m_strBaseExperience"
+                                                                            ascending:YES
+                                                                           comparator:^(id obj1, id obj2){
+                                                                               return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                       options:NSNumericSearch];
+                                                                           }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Highest Weight" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"m_strWeight"
+                                                                           ascending:NO
+                                                                          comparator:^(id obj1, id obj2){
+                                                                              return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                      options:NSNumericSearch];
+                                                                          }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Lowest Weight" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"m_strWeight"
+                                                                           ascending:YES
+                                                                          comparator:^(id obj1, id obj2){
+                                                                              return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                      options:NSNumericSearch];
+                                                                          }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Highest Height" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"m_strHeight"
+                                                                           ascending:NO
+                                                                          comparator:^(id obj1, id obj2){
+                                                                              return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                      options:NSNumericSearch];
+                                                                          }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Lowest Height" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSSortDescriptor * brandDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"m_strHeight"
+                                                                           ascending:YES
+                                                                          comparator:^(id obj1, id obj2){
+                                                                              return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                      options:NSNumericSearch];
+                                                                          }];
+        NSArray * sortDescriptors = [NSArray arrayWithObject:brandDescriptor];
+        NSArray * sortedArray = [self->searchArray sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"sortedArray %@",sortedArray);
+        self->searchArray = [NSMutableArray arrayWithArray:sortedArray];
+        [self.tblVwPokemonList reloadData];
+    }]];
+    
+    alertController.modalPresentationStyle = UIModalPresentationPopover;
+    
+    UIPopoverPresentationController * popover = alertController.popoverPresentationController;
+    popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    popover.sourceView = sender;
+    
+    [self presentViewController: alertController animated: YES completion: nil];
+}
 
 @end

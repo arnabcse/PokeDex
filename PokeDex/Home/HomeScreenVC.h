@@ -11,10 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeScreenVC : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface HomeScreenVC : UIViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     PokeMonListModel *m_objPokeMonListModel;
     NSMutableArray *m_arrListInfo;
+    NSMutableArray *searchArray;
+    NSString *searchStr;
 }
 @property (weak, nonatomic) IBOutlet UITextField *txtFldSearch;
 @property (weak, nonatomic) IBOutlet UIButton *btnFilter;
