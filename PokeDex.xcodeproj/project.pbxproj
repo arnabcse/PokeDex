@@ -28,6 +28,11 @@
 		06E6A8E822BE91D700BAC1B9 /* MovesDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8E722BE91D700BAC1B9 /* MovesDataModel.m */; };
 		06E6A8ED22BE9B8300BAC1B9 /* StatsColVWCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8EC22BE9B8300BAC1B9 /* StatsColVWCell.m */; };
 		06E6A8F022BE9B9D00BAC1B9 /* StatsDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8EF22BE9B9D00BAC1B9 /* StatsDataModel.m */; };
+		06E6A8F522BEAC2600BAC1B9 /* ImagesColVWCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8F422BEAC2600BAC1B9 /* ImagesColVWCell.m */; };
+		06E6A8F822BEB3D900BAC1B9 /* AbilityDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8F722BEB3D900BAC1B9 /* AbilityDataModel.m */; };
+		06E6A8FB22BEB3FE00BAC1B9 /* AbilityColVWCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8FA22BEB3FE00BAC1B9 /* AbilityColVWCell.m */; };
+		06E6A8FE22BEBD3000BAC1B9 /* TypeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8FD22BEBD3000BAC1B9 /* TypeDataModel.m */; };
+		06E6A90122BEBD5100BAC1B9 /* TypeColVWCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A90022BEBD5100BAC1B9 /* TypeColVWCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +91,16 @@
 		06E6A8EC22BE9B8300BAC1B9 /* StatsColVWCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatsColVWCell.m; sourceTree = "<group>"; };
 		06E6A8EE22BE9B9D00BAC1B9 /* StatsDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatsDataModel.h; sourceTree = "<group>"; };
 		06E6A8EF22BE9B9D00BAC1B9 /* StatsDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatsDataModel.m; sourceTree = "<group>"; };
+		06E6A8F322BEAC2600BAC1B9 /* ImagesColVWCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagesColVWCell.h; sourceTree = "<group>"; };
+		06E6A8F422BEAC2600BAC1B9 /* ImagesColVWCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagesColVWCell.m; sourceTree = "<group>"; };
+		06E6A8F622BEB3D900BAC1B9 /* AbilityDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbilityDataModel.h; sourceTree = "<group>"; };
+		06E6A8F722BEB3D900BAC1B9 /* AbilityDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbilityDataModel.m; sourceTree = "<group>"; };
+		06E6A8F922BEB3FE00BAC1B9 /* AbilityColVWCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbilityColVWCell.h; sourceTree = "<group>"; };
+		06E6A8FA22BEB3FE00BAC1B9 /* AbilityColVWCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbilityColVWCell.m; sourceTree = "<group>"; };
+		06E6A8FC22BEBD3000BAC1B9 /* TypeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeDataModel.h; sourceTree = "<group>"; };
+		06E6A8FD22BEBD3000BAC1B9 /* TypeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeDataModel.m; sourceTree = "<group>"; };
+		06E6A8FF22BEBD5100BAC1B9 /* TypeColVWCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeColVWCell.h; sourceTree = "<group>"; };
+		06E6A90022BEBD5100BAC1B9 /* TypeColVWCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeColVWCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +262,12 @@
 				06E6A8E422BE852E00BAC1B9 /* MovesColVWCell.m */,
 				06E6A8EB22BE9B8300BAC1B9 /* StatsColVWCell.h */,
 				06E6A8EC22BE9B8300BAC1B9 /* StatsColVWCell.m */,
+				06E6A8F322BEAC2600BAC1B9 /* ImagesColVWCell.h */,
+				06E6A8F422BEAC2600BAC1B9 /* ImagesColVWCell.m */,
+				06E6A8F922BEB3FE00BAC1B9 /* AbilityColVWCell.h */,
+				06E6A8FA22BEB3FE00BAC1B9 /* AbilityColVWCell.m */,
+				06E6A8FF22BEBD5100BAC1B9 /* TypeColVWCell.h */,
+				06E6A90022BEBD5100BAC1B9 /* TypeColVWCell.m */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -258,6 +279,10 @@
 				06E6A8E722BE91D700BAC1B9 /* MovesDataModel.m */,
 				06E6A8EE22BE9B9D00BAC1B9 /* StatsDataModel.h */,
 				06E6A8EF22BE9B9D00BAC1B9 /* StatsDataModel.m */,
+				06E6A8F622BEB3D900BAC1B9 /* AbilityDataModel.h */,
+				06E6A8F722BEB3D900BAC1B9 /* AbilityDataModel.m */,
+				06E6A8FC22BEBD3000BAC1B9 /* TypeDataModel.h */,
+				06E6A8FD22BEBD3000BAC1B9 /* TypeDataModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,10 +440,15 @@
 				066409A122BEB752004216B0 /* DetailsScreenVC.m in Sources */,
 				066409A722BEC874004216B0 /* PokeMonListCell.m in Sources */,
 				06E6A8E822BE91D700BAC1B9 /* MovesDataModel.m in Sources */,
+				06E6A8F822BEB3D900BAC1B9 /* AbilityDataModel.m in Sources */,
+				06E6A8FB22BEB3FE00BAC1B9 /* AbilityColVWCell.m in Sources */,
 				06E6A8F022BE9B9D00BAC1B9 /* StatsDataModel.m in Sources */,
 				0664099722BEA6EC004216B0 /* LoginScreenVC.m in Sources */,
+				06E6A90122BEBD5100BAC1B9 /* TypeColVWCell.m in Sources */,
 				0664096622BEA5D8004216B0 /* PokeDex.xcdatamodeld in Sources */,
 				066409AA22BF56B3004216B0 /* PokeMonListModel.m in Sources */,
+				06E6A8F522BEAC2600BAC1B9 /* ImagesColVWCell.m in Sources */,
+				06E6A8FE22BEBD3000BAC1B9 /* TypeDataModel.m in Sources */,
 				0664099B22BEB70A004216B0 /* SignUpScreenVC.m in Sources */,
 				0664096E22BEA5DA004216B0 /* main.m in Sources */,
 				0664095D22BEA5D8004216B0 /* AppDelegate.m in Sources */,

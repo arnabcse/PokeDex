@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MovesDataModel.h"
 #import "StatsDataModel.h"
+#import "AbilityDataModel.h"
+#import "TypeDataModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +23,15 @@ NS_ASSUME_NONNULL_BEGIN
     NSInteger movesCounter;
     NSMutableArray * m_arrStatsData;
     StatsDataModel *m_objStatsDataModel;
+    NSString * imageStr1;
+    NSString * imageStr2;
+    NSString * imageStr3;
+    NSString * imageStr4;
+    NSMutableArray * m_arrImagesData;
+    NSMutableArray * m_arrAbilityData;
+    AbilityDataModel *m_objAbilityDataModel;
+    NSMutableArray * m_arrTypeData;
+    TypeDataModel *m_objTypeDataModel;
 }
 @property (weak, nonatomic) IBOutlet UILabel *lblNamePokemon;
 @property (weak, nonatomic) IBOutlet UIView *vwMoves;
@@ -29,6 +40,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *vwStats;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *colVWStats;
+
+@property (weak, nonatomic) IBOutlet UIView *vwImages;
+@property (weak, nonatomic) IBOutlet UICollectionView *colVWImages;
+
+@property (weak, nonatomic) IBOutlet UIView *vwAbility;
+@property (weak, nonatomic) IBOutlet UICollectionView *colVWAbility;
+
+@property (weak, nonatomic) IBOutlet UIView *vwType;
+@property (weak, nonatomic) IBOutlet UICollectionView *colVWType;
 
 
 @property (nonatomic, strong) NSString *strPokemonName;
