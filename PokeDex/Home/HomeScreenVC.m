@@ -25,6 +25,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    [self.menuVW setAlpha:0.5];
+    [self.menuVW setUserInteractionEnabled:NO];
     [self.actIndicatorVw startAnimating];
     self.tblVwPokemonList.delegate = self;
     self.tblVwPokemonList.dataSource = self;
@@ -34,6 +36,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.actIndicatorVw stopAnimating];
             [self.tblVwPokemonList reloadData];
+            [self.menuVW setAlpha:1];
+            [self.menuVW setUserInteractionEnabled:YES];
         });
     });
 }

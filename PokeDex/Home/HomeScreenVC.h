@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *btnFilter;
 @property (weak, nonatomic) IBOutlet UITableView *tblVwPokemonList;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *actIndicatorVw;
+@property (weak, nonatomic) IBOutlet UIView *menuVW;
 
 
 @end
