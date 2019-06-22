@@ -24,6 +24,10 @@
 		066409AA22BF56B3004216B0 /* PokeMonListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 066409A922BF56B3004216B0 /* PokeMonListModel.m */; };
 		066409D422BF56B3004216B0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066409D322BF56B3004216B0 /* CoreData.framework */; };
 		066409D622BF56B3004216B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066409D522BF56B3004216B0 /* Foundation.framework */; };
+		06E6A8E522BE852E00BAC1B9 /* MovesColVWCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8E422BE852E00BAC1B9 /* MovesColVWCell.m */; };
+		06E6A8E822BE91D700BAC1B9 /* MovesDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8E722BE91D700BAC1B9 /* MovesDataModel.m */; };
+		06E6A8ED22BE9B8300BAC1B9 /* StatsColVWCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8EC22BE9B8300BAC1B9 /* StatsColVWCell.m */; };
+		06E6A8F022BE9B9D00BAC1B9 /* StatsDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8EF22BE9B9D00BAC1B9 /* StatsDataModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,14 @@
 		066409A922BF56B3004216B0 /* PokeMonListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokeMonListModel.m; sourceTree = "<group>"; };
 		066409D322BF56B3004216B0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		066409D522BF56B3004216B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		06E6A8E322BE852E00BAC1B9 /* MovesColVWCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovesColVWCell.h; sourceTree = "<group>"; };
+		06E6A8E422BE852E00BAC1B9 /* MovesColVWCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovesColVWCell.m; sourceTree = "<group>"; };
+		06E6A8E622BE91D700BAC1B9 /* MovesDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovesDataModel.h; sourceTree = "<group>"; };
+		06E6A8E722BE91D700BAC1B9 /* MovesDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovesDataModel.m; sourceTree = "<group>"; };
+		06E6A8EB22BE9B8300BAC1B9 /* StatsColVWCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatsColVWCell.h; sourceTree = "<group>"; };
+		06E6A8EC22BE9B8300BAC1B9 /* StatsColVWCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatsColVWCell.m; sourceTree = "<group>"; };
+		06E6A8EE22BE9B9D00BAC1B9 /* StatsDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatsDataModel.h; sourceTree = "<group>"; };
+		06E6A8EF22BE9B9D00BAC1B9 /* StatsDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatsDataModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,12 +184,10 @@
 		0664099122BEA623004216B0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				06E6A8F222BE9BBE00BAC1B9 /* Custom Cell */,
+				06E6A8F122BE9BB300BAC1B9 /* Model */,
 				0664099C22BEB72D004216B0 /* HomeScreenVC.h */,
 				0664099D22BEB72D004216B0 /* HomeScreenVC.m */,
-				066409A522BEC874004216B0 /* PokeMonListCell.h */,
-				066409A622BEC874004216B0 /* PokeMonListCell.m */,
-				066409A822BF56B3004216B0 /* PokeMonListModel.h */,
-				066409A922BF56B3004216B0 /* PokeMonListModel.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -185,6 +195,8 @@
 		0664099222BEA630004216B0 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				06E6A8EA22BE9B5A00BAC1B9 /* Model */,
+				06E6A8E922BE9B4800BAC1B9 /* Custom Cell */,
 				0664099F22BEB752004216B0 /* DetailsScreenVC.h */,
 				066409A022BEB752004216B0 /* DetailsScreenVC.m */,
 			);
@@ -226,6 +238,46 @@
 				066409A322BEBD8C004216B0 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		06E6A8E922BE9B4800BAC1B9 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				06E6A8E322BE852E00BAC1B9 /* MovesColVWCell.h */,
+				06E6A8E422BE852E00BAC1B9 /* MovesColVWCell.m */,
+				06E6A8EB22BE9B8300BAC1B9 /* StatsColVWCell.h */,
+				06E6A8EC22BE9B8300BAC1B9 /* StatsColVWCell.m */,
+			);
+			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
+		06E6A8EA22BE9B5A00BAC1B9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06E6A8E622BE91D700BAC1B9 /* MovesDataModel.h */,
+				06E6A8E722BE91D700BAC1B9 /* MovesDataModel.m */,
+				06E6A8EE22BE9B9D00BAC1B9 /* StatsDataModel.h */,
+				06E6A8EF22BE9B9D00BAC1B9 /* StatsDataModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		06E6A8F122BE9BB300BAC1B9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				066409A822BF56B3004216B0 /* PokeMonListModel.h */,
+				066409A922BF56B3004216B0 /* PokeMonListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		06E6A8F222BE9BBE00BAC1B9 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				066409A522BEC874004216B0 /* PokeMonListCell.h */,
+				066409A622BEC874004216B0 /* PokeMonListCell.m */,
+			);
+			path = "Custom Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,8 +410,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E6A8E522BE852E00BAC1B9 /* MovesColVWCell.m in Sources */,
+				06E6A8ED22BE9B8300BAC1B9 /* StatsColVWCell.m in Sources */,
 				066409A122BEB752004216B0 /* DetailsScreenVC.m in Sources */,
 				066409A722BEC874004216B0 /* PokeMonListCell.m in Sources */,
+				06E6A8E822BE91D700BAC1B9 /* MovesDataModel.m in Sources */,
+				06E6A8F022BE9B9D00BAC1B9 /* StatsDataModel.m in Sources */,
 				0664099722BEA6EC004216B0 /* LoginScreenVC.m in Sources */,
 				0664096622BEA5D8004216B0 /* PokeDex.xcdatamodeld in Sources */,
 				066409AA22BF56B3004216B0 /* PokeMonListModel.m in Sources */,

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PokeMonListModel : NSObject
 
+@property (nonatomic, retain) NSString *m_strURL;
 @property (nonatomic, retain) NSString *m_strImage;
 @property (nonatomic, retain) NSString *m_strName;
 @property (nonatomic, retain) NSString *m_strId;

@@ -9,7 +9,7 @@
 #import "PokeMonListModel.h"
 
 @implementation PokeMonListModel
-@synthesize m_strImage,m_strName,m_strId,m_strOrder,m_strHeight,m_strWeight,m_strBaseExperience;
+@synthesize m_strImage,m_strName,m_strId,m_strOrder,m_strHeight,m_strWeight,m_strBaseExperience,m_strURL;
 
 
 - (id)init
@@ -24,6 +24,7 @@
         self.m_strHeight = @"";
         self.m_strWeight = @"";
         self.m_strBaseExperience = @"";
+        self.m_strURL = @"";
         
     }
     

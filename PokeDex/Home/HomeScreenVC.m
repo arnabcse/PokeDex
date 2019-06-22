@@ -9,7 +9,7 @@
 
 #import "HomeScreenVC.h"
 #import "PokeMonListCell.h"
-
+#import "DetailsScreenVC.h"
 
 @interface HomeScreenVC ()
 
@@ -63,6 +63,7 @@
         NSString *stringImage = @"";
         stringImage = [images valueForKey:@"front_shiny"];
         m_objPokeMonListModel = [[PokeMonListModel alloc]init];
+        [m_objPokeMonListModel setM_strURL:url_stringInfo];
         [m_objPokeMonListModel setM_strImage:stringImage];
         [m_objPokeMonListModel setM_strName:[jsonInfoData valueForKey:@"name"]];
         [m_objPokeMonListModel setM_strId:[[jsonInfoData valueForKey:@"id"] stringValue]];
@@ -277,5 +278,15 @@
     
     [self presentViewController: alertController animated: YES completion: nil];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"details"]) {
+        NSIndexPath *indexPath = [self.tblVwPokemonList indexPathForSelectedRow];
+        DetailsScreenVC *destViewController = segue.destinationViewController;
+        destViewController.strPokemonName = [[searchArray objectAtIndex:indexPath.row]m_strName];
+        destViewController.strPokemonURL = [[searchArray objectAtIndex:indexPath.row]m_strURL];
+    }
+}
+
 
 @end
