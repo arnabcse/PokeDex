@@ -11,12 +11,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginScreenVC : UIViewController
-
+{
+    NSMutableArray *userData;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *txtFldUserName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFldPassoword;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignIn;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
+
+@property (strong) NSMutableArray *userData;
 
 @end
 

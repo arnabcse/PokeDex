@@ -22,7 +22,6 @@
 		066409A422BEBD8D004216B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066409A322BEBD8C004216B0 /* QuartzCore.framework */; };
 		066409A722BEC874004216B0 /* PokeMonListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 066409A622BEC874004216B0 /* PokeMonListCell.m */; };
 		066409AA22BF56B3004216B0 /* PokeMonListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 066409A922BF56B3004216B0 /* PokeMonListModel.m */; };
-		066409D422BF56B3004216B0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066409D322BF56B3004216B0 /* CoreData.framework */; };
 		066409D622BF56B3004216B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066409D522BF56B3004216B0 /* Foundation.framework */; };
 		06E6A8E522BE852E00BAC1B9 /* MovesColVWCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8E422BE852E00BAC1B9 /* MovesColVWCell.m */; };
 		06E6A8E822BE91D700BAC1B9 /* MovesDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E6A8E722BE91D700BAC1B9 /* MovesDataModel.m */; };
@@ -109,7 +108,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				066409D622BF56B3004216B0 /* Foundation.framework in Frameworks */,
-				066409D422BF56B3004216B0 /* CoreData.framework in Frameworks */,
 				066409A422BEBD8D004216B0 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
