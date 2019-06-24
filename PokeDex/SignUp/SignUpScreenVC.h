@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SignUpScreenVC : UIViewController
-
+@interface SignUpScreenVC : UIViewController<UITextFieldDelegate>
+{
+    UITextField *activeTextField;
+}
 @property (weak, nonatomic) IBOutlet UITextField *txtFldFirstName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFldLastName;
 @property (weak, nonatomic) IBOutlet UITextField *txtFldUserName;

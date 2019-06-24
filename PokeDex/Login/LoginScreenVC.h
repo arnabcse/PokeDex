@@ -10,9 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LoginScreenVC : UIViewController
+@interface LoginScreenVC : UIViewController<UITextFieldDelegate>
 {
     NSMutableArray *userData;
+    UITextField *activeTextField;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *txtFldUserName;

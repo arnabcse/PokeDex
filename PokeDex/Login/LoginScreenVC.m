@@ -31,11 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self constructUI];
+    self.txtFldUserName.delegate = self;
+    self.txtFldPassoword.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [self constructUI];
     [self fetchUserSavedData];
 }
 
@@ -49,7 +50,14 @@
 - (void)constructUI{
     self.btnSignIn.layer.cornerRadius = 20;
     self.btnSignIn.clipsToBounds = YES;
-    [self.btnSignUp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIColor *color = [UIColor whiteColor];
+    NSString *string = @"Sign Up";
+    NSDictionary *attrs = @{ NSForegroundColorAttributeName : color,
+                             NSUnderlineColorAttributeName: color,
+                             NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)
+                             };
+    NSAttributedString *attrStrSignUp = [[NSAttributedString alloc] initWithString:string attributes:attrs];
+    self.btnSignUp.titleLabel.attributedText = attrStrSignUp;
 }
 
 - (BOOL)validateLogin{
@@ -79,15 +87,23 @@
         }else if(self.validateLogin){
             message = @"Wrong Credentials - Username/Password Or Create a new User By Clicking Sign Up at the bottom";
             [self showAlertMessage:(NSString *)message];
-            [self.txtFldUserName setText:@""];
-            [self.txtFldPassoword setText:@""];
+            [self clearTextFieldEntry];
             ret=NO;
         }
         else{
+            if([activeTextField isFirstResponder])
+                [activeTextField resignFirstResponder];
+            activeTextField = nil;
+            [self clearTextFieldEntry];
             ret=YES;
         }
     }
     return ret;
+}
+
+- (void) clearTextFieldEntry{
+    [self.txtFldUserName setText:@""];
+    [self.txtFldPassoword setText:@""];
 }
 
 - (void) showAlertMessage:(NSString *)messageText{
@@ -105,6 +121,58 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self presentViewController:alert animated:YES completion:nil];
     });
+}
+
+
+#pragma mark - Text Field Delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSLog(@"textFieldShouldBeginEditing");
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    NSLog(@"textFieldDidBeginEditing");
+    activeTextField = textField;
+    [self animateTextField:textField up:YES];
+}
+
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    NSLog(@"textFieldShouldEndEditing");
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSLog(@"textFieldDidEndEditing");
+    [self animateTextField:textField up:NO];
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField{
+    NSLog(@"textFieldShouldClear:");
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@"textFieldShouldReturn:");
+    [textField resignFirstResponder];
+    if([textField isFirstResponder]){
+        [self animateTextField:textField up:NO];
+    } else {
+       NSLog(@"textFieldFocusLost:");
+    }
+    return YES;
+}
+
+-(void)animateTextField:(UITextField*)textField up:(BOOL)up
+{
+    const int movementDistance = -90;
+    const float movementDuration = 0.3f;
+    int movement = (up ? movementDistance : -movementDistance);
+    [UIView beginAnimations: @"animateTextField" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
 }
 
 @end

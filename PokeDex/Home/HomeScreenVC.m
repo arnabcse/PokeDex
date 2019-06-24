@@ -10,6 +10,7 @@
 #import "HomeScreenVC.h"
 #import "PokeMonListCell.h"
 #import "DetailsScreenVC.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface HomeScreenVC ()
 
@@ -19,17 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.txtFldSearch.delegate = self;
-    searchStr = @"";
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
     [self.menuVW setAlpha:0.5];
     [self.menuVW setUserInteractionEnabled:NO];
     [self.actIndicatorVw startAnimating];
-    self.tblVwPokemonList.delegate = self;
-    self.tblVwPokemonList.dataSource = self;
+    self.txtFldSearch.delegate = self;
+    searchStr = @"";
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
         [self fetchData];
@@ -40,6 +35,12 @@
             [self.menuVW setUserInteractionEnabled:YES];
         });
     });
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.tblVwPokemonList.delegate = self;
+    self.tblVwPokemonList.dataSource = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -100,10 +101,28 @@
     cell.lblPokemonHeight.text = [[searchArray objectAtIndex:indexPath.row]m_strHeight];
     cell.lblPokemonWeight.text = [[searchArray objectAtIndex:indexPath.row]m_strWeight];
     cell.lblPokemonBaseExp.text = [[searchArray objectAtIndex:indexPath.row]m_strBaseExperience];
+    
+    //AFNetworking lazyloading 
+    NSURL *url = [NSURL URLWithString:[[searchArray objectAtIndex:indexPath.row]m_strImage]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    __weak UITableViewCell *weakCell = cell;
+    [cell.imgVWPokemoNImg setImageWithURLRequest:request
+                          placeholderImage:nil
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       
+                                       cell.imgVWPokemoNImg.image = image;
+                                       cell.imgVWPokemoNImg.contentMode = UIViewContentModeScaleToFill;
+                                       [weakCell setNeedsLayout];
+                                       
+                                   } failure:nil];
+    
+    /*
     NSURL *url = [NSURL URLWithString:[[searchArray objectAtIndex:indexPath.row]m_strImage]];
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *img = [[UIImage alloc] initWithData:data];
     cell.imgVWPokemoNImg.image = img;
+     */
+    
     cell.separatorInset = UIEdgeInsetsMake(20, 20, 20, 20);
     cell.layer.borderWidth = 10;
     cell.layer.borderColor = [cell backgroundColor].CGColor;

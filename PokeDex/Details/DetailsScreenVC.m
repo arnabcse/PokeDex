@@ -13,6 +13,7 @@
 #import "AbilityColVWCell.h"
 #import "TypeColVWCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIImageView+AFNetworking.h"
 
 @interface DetailsScreenVC ()
 
@@ -164,10 +165,28 @@
         return cell;
     }else{
         ImagesColVWCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImagesColCell" forIndexPath:indexPath];
+        
+        //AFNetworking lazyloading
+        NSURL *url = [NSURL URLWithString:[m_arrImagesData objectAtIndex:indexPath.row]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        __weak UICollectionViewCell *weakCell = cell;
+        [cell.image setImageWithURLRequest:request
+                                    placeholderImage:nil
+                                             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                 
+                                                 cell.image.image = image;
+                                                 cell.image.contentMode = UIViewContentModeScaleToFill;
+                                                 [weakCell setNeedsLayout];
+                                                 
+                                             } failure:nil];
+        
+        /*
         NSURL *url = [NSURL URLWithString:[m_arrImagesData objectAtIndex:indexPath.row]];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage *img = [[UIImage alloc] initWithData:data];
         cell.image.image = img;
+         */
+        
         return cell;
     }
     
